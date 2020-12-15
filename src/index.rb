@@ -63,3 +63,37 @@ def save_data(curr_data)
     end
     choice
   end
+
+  def get_info_value
+    value = ""
+    while true
+      value =  gets.chomp.to_s
+      if value == ""
+        puts "Please enter valid value"
+      else
+        break
+      end
+    end
+    value
+  end
+
+  def get_new_medication(curr_data)
+    puts "Please Enter Medication Name: "
+    name = get_info_value
+    puts "Please Enter Medication Use: "
+    use = get_info_value
+    puts "Please Enter Medication Schedule: "
+    schedule = get_info_value
+    curr_data.append(Medication.new(name,use,schedule))
+  end
+  
+  def display_medication(read_data, curr_data)
+    puts "\t\t\t\tList of Medication"
+    puts "Medication Name" + "          "+ "Medication Use" + "          " + "Medication Schedule"
+    read_data.each do |item|
+      item.print_medication
+    end
+    curr_data.each do |item|
+      item.print_medication
+    end
+  end
