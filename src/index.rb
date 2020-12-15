@@ -4,7 +4,7 @@ require_relative './methods/methods.rb'
 loading_screen("T1A3 Coder Academy Assignment")
 
 class Medication
-  def initialize(name,use,schedule)
+  def initialize(name, use, schedule)
     @name = name
     @use = use
     @schedule = schedule
@@ -17,14 +17,27 @@ class Medication
   def get_use
     @use
   end
+
   def get_schedule
     @schedule
   end
 
-  def print_medication
-    puts @name + "                  " + @use + "                " +@schedule
+  def set_name(name)
+    @name = name
   end
 
+  def set_use(use)
+    @use = use
+  end
+
+  def set_schedule(schedule)
+    @schedule = schedule
+  end
+
+  def print_medication(count)
+    puts
+    puts count.to_s.ljust(8) + @name.ljust(20) +  @use.ljust(19) +  @schedule.ljust(29)
+  end
 end
 
 def save_data(curr_data)
