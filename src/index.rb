@@ -278,7 +278,7 @@ def main_loop
   curr_data = Array.new
   read_data = Array.new
   while true
-    menu_choices = ['Medication Info', 'Mass Unit Conversion', 'Volume Unit Conversion', 'BMI Calculater', 'Admin Definitions', 'Exit']
+    menu_choices = ['Medication Info', 'Mass Unit Conversion', 'Volume Unit Conversion', 'BMI Calculater', 'Medication Route Definitions', 'Exit']
     menu_choice = prompt.select('Please Select: ', menu_choices)
     choice = menu_choices.find_index(menu_choice) + 1
     if choice == 1
