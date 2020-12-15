@@ -40,6 +40,32 @@ class Medication
   end
 end
 
+def bmi_calculator(prompt)
+  while true
+    weight = get_value('Enter your weight in Kg: ')
+    height = get_value('Enter your height in CM') / 100
+    bmi = weight / (height * height)
+    if bmi < 18.5
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are under weight'
+    elsif bmi >= 18.5 && bmi < 25
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' Your weight is normal'
+    elsif bmi >= 25 && bmi < 30
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are over weight'
+    else
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are obese'
+    end
+    menu_choices = ['Calculate Another', 'Back to Main Menu', 'Exit Application']
+    menu_choice = prompt.select('Please Select: ', menu_choices)
+    choice = menu_choices.find_index(menu_choice) + 1
+    if choice == 1
+      next
+    else
+      break
+    end
+  end
+  choice
+end
+
 def save_data(read_data, curr_data)
   open('medication-store.txt', 'w') do |f|
     read_data.each do |item|
