@@ -77,29 +77,88 @@ def save_data(read_data, curr_data)
   end
 end
 
-def read_medication
-  if File.exist?("medication-store.txt")
-    read_data = []
-    File.open("medication-store.txt").each do |line|
+def read_medication(read_data)
+  if File.exist?('medication-store.txt')
+    File.open('medication-store.txt').each do |line|
       data = line.split(',')
-      read_data.append(Medication.new(data[0],data[1],data[2]))
+      read_data << Medication.new(data[0], data[1], data[2])
     end
   else
-    puts "No file named medication-info.txt found in current directory"
+    puts 'No file named medication-info.txt found in current directory'
   end
   read_data
 end
 
-def medication_menu(curr_data, prompt)
-  read_data = read_medication
+def display_definitions(prompt)
+  definitions = ['IM– Intramuscular', 'IO– Intraosseous', 'IV– Intravenous', 'IVP– Intravenous Push',
+                 'ID – Intradermal', 'IN – Intranasal', 'IP – Intraperitoneal', 'IT – Intrathecal', 'IVPB – Intravenous piggyback',
+                 'p.o – By mouth', 'SC / SubQ – Subcutaneous', 'SL – Sublingual', 'top. – Topical', 'vag. – Vaginally']
+  puts 'List of Definitions'
+  definitions.each do |item|
+    puts item
+  end
+  menu_choices = ['Back to Main Menu', 'Exit Application']
+  menu_choice = prompt.select('Please Select: ', menu_choices)
+  menu_choices.find_index(menu_choice) + 1
+end
+
+def do_update(medicines,index)
+  puts 'Please Enter New Medication Name: '
+  name = get_info_value
+  puts 'Please Enter New Medication Use: '
+  use = get_info_value
+  puts 'Please Enter New Medication Schedule: '
+  schedule = get_info_value
+  medicines.delete_at(index)
+  medicines.insert(index,Medication.new(name,use,schedule))
+  puts 'Updated Successfully'
+end
+
+def update_medication(read_data, curr_data ,prompt)
+  loop do
+    display_medication(read_data, curr_data)
+    while true
+      value = get_value('Please Entre ID of Medicine to update: ').to_i
+      if value > (read_data.length + curr_data.length)
+        puts 'Please enter id value within range'
+      else
+        break
+      end
+    end
+    if value <= read_data.length
+      do_update(read_data,value-1)
+    else
+      do_update(curr_data,value-1)
+    end
+    menu_choices = ['Update Another Medication', 'Back to Main Menu', 'Exit Application']
+    menu_choice = prompt.select('Please Select: ', menu_choices)
+    choice = menu_choices.find_index(menu_choice) + 1
+    if choice == 1
+      next
+    else
+      break
+    end
+  end
+end
+
+def medication_menu(curr_data, prompt, read_data)
+  if read_data.empty?
+    read_medication(read_data)
+  end
   while true
-    menu_choices = ["Enter new Medication info", "Display Medication List", "Back to Main Menu", "Exit Application"]
-    menu_choice = prompt.select("Please Select: ",menu_choices)
-    choice = menu_choices.find_index(menu_choice)+1
+    menu_choices = ['Enter new Medication info', 'Display Medication List', 'Update Medication', 'Back to Main Menu', 'Exit Application']
+    menu_choice = prompt.select('Please Select: ', menu_choices)
+    choice = menu_choices.find_index(menu_choice) + 1
     if choice == 1
       get_new_medication(curr_data)
     elsif choice == 2
-      display_medication(read_data,curr_data)
+      if (read_data.nil? || read_data.empty?) && (curr_data.nil? || curr_data.empty?)
+        puts 'Nothing to display'
+      else
+        display_medication(read_data, curr_data)
+      end
+    elsif choice == 3
+      return update_medication(read_data, curr_data,prompt)
     else
       break
     end
@@ -108,11 +167,11 @@ def medication_menu(curr_data, prompt)
 end
 
 def get_info_value
-  value = ""
-  while true
+  value = ''
+  loop do
     value =  gets.chomp.to_s
-    if value == ""
-      puts "Please enter valid value"
+    if value == ''
+      puts 'Please enter valid value'
     else
       break
     end
@@ -121,33 +180,36 @@ def get_info_value
 end
 
 def get_new_medication(curr_data)
-  puts "Please Enter Medication Name: "
+  puts 'Please Enter Medication Name: '
   name = get_info_value
-  puts "Please Enter Medication Use: "
+  puts 'Please Enter Medication Use: '
   use = get_info_value
-  puts "Please Enter Medication Schedule: "
+  puts 'Please Enter Medication Schedule: '
   schedule = get_info_value
-  curr_data.append(Medication.new(name,use,schedule))
+  curr_data << Medication.new(name, use, schedule)
 end
 
 def display_medication(read_data, curr_data)
-  puts "\t\t\t\tList of Medication"
-  puts "Medication Name" + "          "+ "Medication Use" + "          " + "Medication Schedule"
+  puts "\t\t\tList of Medication"
+  counter = 1
+  puts 'ID'.ljust(8) + 'Medication Name'.ljust(20) + 'Medication Use'.ljust(19) + 'Medication Schedule'.ljust(29)
   read_data.each do |item|
-    item.print_medication
+    item.print_medication(counter.to_s)
+    counter += 1
   end
   curr_data.each do |item|
-    item.print_medication
+    item.print_medication(counter.to_s)
+    counter += 1
   end
 end
 
 def get_value(message)
   value = 0
-  while true
+  loop do
     puts message
     value = gets.chomp.to_f
-    if value < 0
-      puts "Please enter a valid value"
+    if value <= 0
+      puts 'Please enter a valid value'
     else
       break
     end
@@ -156,90 +218,89 @@ def get_value(message)
 end
 
 def mass_conversion(prompt)
-    mass_choices = ["KG to G", "G to mG", "mG to uG", "uG to mG", "mG to G",
-                    "G to KG", "Back to Main Menu", "Exit Application"]
-    while true
-      mass_choice = prompt.select("Please Select: ",mass_choices)
-      choice = mass_choices.find_index(mass_choice)+1
-      if choice >=1 && choice <= 6
-        value = get_value("Please enter value to convert: ")
-        if choice == 1
-          puts  value.to_s + " Kg = " + (value*1000).to_s + " G"
-        elsif  choice == 2
-          puts  value.to_s + " G = " + (value*1000).to_s + " mG"
-        elsif  choice == 3
-          puts  value.to_s + " mg = " + (value*1000).to_s + " uG"
-        elsif  choice == 4
-          puts  value.to_s + " uG = " + (value/1000).to_s + " mG"
-        elsif  choice == 5
-          puts  value.to_s + " mG = " + (value/1000).to_s + " G"
-        elsif  choice == 6
-          puts  value.to_s + " G = " + (value/1000).to_s + " KG"
-        end
-      else
-        break
-      end
-    end
-    choice
-end
-
-def volume_conversion(prompt)
-
-    volume_choices = ["KL to L", "L to mL", "mL to uL", "uL to mL", "mL to L",
-                    "L to KL", "Back to Main Menu", "Exit Application"]
-    while true
-      volume_choice = prompt.select("Please Select: ",volume_choices)
-      choice = volume_choices.find_index(volume_choice)+1
-      if choice >=1 && choice <= 6
-        value = get_value("Please enter value to convert: ")
-        if choice == 1
-          puts  value.to_s + " KL = " + (value*1000).to_s + " L"
-        elsif  choice == 2
-          puts  value.to_s + " L = " + (value*1000).to_s + " mL"
-        elsif  choice == 3
-          puts  value.to_s + " mg = " + (value*1000).to_s + " uL"
-        elsif  choice == 4
-          puts  value.to_s + " uL = " + (value/1000).to_s + " mL"
-        elsif  choice == 5
-          puts  value.to_s + " mL = " + (value/1000).to_s + " L"
-        elsif  choice == 6
-          puts  value.to_s + " L = " + (value/1000).to_s + " KL"
-        end
-      else
-        break
-      end
-    end
-    choice
-end
-
-def main_loop
-
-  prompt = TTY::Prompt.new
-  curr_data = []
+  mass_choices = ['KG to G', 'G to mG', 'mG to uG', 'uG to mG', 'mG to G',
+                  'G to KG', 'Back to Main Menu', 'Exit Application']
   while true
-    menu_choices = ["Medication Info","Mass Unit Conversion","Volume Unit Conversion","Exit"]
-    menu_choice = prompt.select("Please Select: ",menu_choices)
-    choice = menu_choices.find_index(menu_choice)+1
-    if choice == 1
-      value = medication_menu(curr_data,prompt)
-      if value == 4
-        break
-      end
-    elsif choice == 2
-      value = mass_conversion(prompt)
-      if value == 8
-        break
-      end
-    elsif  choice == 3
-      value = volume_conversion(prompt)
-      if value == 8
-        break
+    mass_choice = prompt.select('Please Select: ', mass_choices)
+    choice = mass_choices.find_index(mass_choice) + 1
+    if choice >= 1 && choice <= 6
+      value = get_value('Please enter value to convert: ')
+      if choice == 1
+        puts  value.to_s + ' Kg = ' + (value * 1000).to_s + ' G'
+      elsif  choice == 2
+        puts  value.to_s + ' G = ' + (value * 1000).to_s + ' mG'
+      elsif  choice == 3
+        puts  value.to_s + ' mg = ' + (value * 1000).to_s + ' uG'
+      elsif  choice == 4
+        puts  value.to_s + ' uG = ' + (value / 1000).to_s + ' mG'
+      elsif  choice == 5
+        puts  value.to_s + ' mG = ' + (value / 1000).to_s + ' G'
+      elsif  choice == 6
+        puts  value.to_s + ' G = ' + (value / 1000).to_s + ' KG'
       end
     else
       break
     end
   end
-  save_data(curr_data)
+  choice
+end
+
+def volume_conversion(prompt)
+  volume_choices = ['KL to L', 'L to mL', 'mL to uL', 'uL to mL', 'mL to L',
+                    'L to KL', 'Back to Main Menu', 'Exit Application']
+  while true
+    volume_choice = prompt.select('Please Select: ', volume_choices)
+    choice = volume_choices.find_index(volume_choice) + 1
+    if choice >= 1 && choice <= 6
+      value = get_value('Please enter value to convert: ')
+      if choice == 1
+        puts  value.to_s + ' KL = ' + (value * 1000).to_s + ' L'
+      elsif  choice == 2
+        puts  value.to_s + ' L = ' + (value * 1000).to_s + ' mL'
+      elsif  choice == 3
+        puts  value.to_s + ' mg = ' + (value * 1000).to_s + ' uL'
+      elsif  choice == 4
+        puts  value.to_s + ' uL = ' + (value / 1000).to_s + ' mL'
+      elsif  choice == 5
+        puts  value.to_s + ' mL = ' + (value / 1000).to_s + ' L'
+      elsif  choice == 6
+        puts  value.to_s + ' L = ' + (value / 1000).to_s + ' KL'
+      end
+    else
+      break
+    end
+  end
+  choice
+end
+
+def main_loop
+  prompt = TTY::Prompt.new
+  curr_data = Array.new
+  read_data = Array.new
+  while true
+    menu_choices = ['Medication Info', 'Mass Unit Conversion', 'Volume Unit Conversion', 'BMI Calculater', 'Admin Definitions', 'Exit']
+    menu_choice = prompt.select('Please Select: ', menu_choices)
+    choice = menu_choices.find_index(menu_choice) + 1
+    if choice == 1
+      value = medication_menu(curr_data, prompt, read_data)
+      break if value == 5 || value == 3
+    elsif choice == 2
+      value = mass_conversion(prompt)
+      break if value == 8
+    elsif choice == 3
+      value = volume_conversion(prompt)
+      break if value == 8
+    elsif choice == 4
+      value = bmi_calculator(prompt)
+      break if value == 3
+    elsif choice == 5
+      value = display_definitions(prompt)
+      break if value == 2
+    else
+      break
+    end
+  end
+  save_data(read_data, curr_data)
 end
 
 main_loop
