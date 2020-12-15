@@ -168,3 +168,36 @@ def save_data(curr_data)
       end
       choice
   end
+
+  def main_loop
+
+    prompt = TTY::Prompt.new
+    curr_data = []
+    while true
+      menu_choices = ["Medication Info","Mass Unit Conversion","Volume Unit Conversion","Exit"]
+      menu_choice = prompt.select("Please Select: ",menu_choices)
+      choice = menu_choices.find_index(menu_choice)+1
+      if choice == 1
+        value = medication_menu(curr_data,prompt)
+        if value == 4
+          break
+        end
+      elsif choice == 2
+        value = mass_conversion(prompt)
+        if value == 8
+          break
+        end
+      elsif  choice == 3
+        value = volume_conversion(prompt)
+        if value == 8
+          break
+        end
+      else
+        break
+      end
+    end
+    save_data(curr_data)
+  end
+  
+  main_loop
+  
