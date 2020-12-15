@@ -46,13 +46,13 @@ def bmi_calculator(prompt)
     height = get_value('Enter your height in CM') / 100
     bmi = weight / (height * height)
     if bmi < 18.5
-      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are under weight'
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are classified as under weight'
     elsif bmi >= 18.5 && bmi < 25
-      puts "Your BMI score is " + (bmi.to_i).to_s + ' Your weight is normal'
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' Your weight is classified as within normal range'
     elsif bmi >= 25 && bmi < 30
-      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are over weight'
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are classified as over weight'
     else
-      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are obese'
+      puts "Your BMI score is " + (bmi.to_i).to_s + ' You are classified as obese'
     end
     menu_choices = ['Calculate Another', 'Back to Main Menu', 'Exit Application']
     menu_choice = prompt.select('Please Select: ', menu_choices)
@@ -278,23 +278,23 @@ def main_loop
   curr_data = Array.new
   read_data = Array.new
   while true
-    menu_choices = ['Medication Info', 'Mass Unit Conversion', 'Volume Unit Conversion', 'BMI Calculater', 'Medication Route Definitions', 'Exit']
+    menu_choices = ['Medication Lists and Information', 'Medication Route Definitions', 'Volume Unit Conversion', 'Mass Unit Conversion', 'BMI Calculater', 'Exit']
     menu_choice = prompt.select('Please Select: ', menu_choices)
     choice = menu_choices.find_index(menu_choice) + 1
     if choice == 1
       value = medication_menu(curr_data, prompt, read_data)
       break if value == 5 || value == 3
     elsif choice == 2
-      value = mass_conversion(prompt)
+      value = display_definitions(prompt)
       break if value == 8
     elsif choice == 3
       value = volume_conversion(prompt)
       break if value == 8
     elsif choice == 4
-      value = bmi_calculator(prompt)
+      value = mass_conversion(prompt)
       break if value == 3
     elsif choice == 5
-      value = display_definitions(prompt)
+      value = bmi_calculator(prompt)
       break if value == 2
     else
       break
