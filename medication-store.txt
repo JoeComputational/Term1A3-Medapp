@@ -1,0 +1,4 @@
+Ibuprofen,NSAID- Mild To Moderate Pain Relief, S2
+Paracetamol,Mild to Moderate PAin Relief, S2
+Coloxyl, Slow onset and Mild Constipation Relief, OTC
+Coloxyl and Senna, More Rapid Onset Constipation Relief, OTC

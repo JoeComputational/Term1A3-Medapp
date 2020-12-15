@@ -1,7 +1,7 @@
 require 'tty-prompt'
 require_relative './methods/methods.rb'
 
-loading_screen("T1A3 Coder Academy Assignment")
+loading_screen("T1A3 Ruby Code Terminal APP ")
 
 class Medication
   def initialize(name, use, schedule)
