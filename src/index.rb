@@ -1,6 +1,8 @@
 require 'tty-prompt'
 require_relative './methods/methods.rb'
 
+loading_screen("T1A3 Coder Academy Assignment")
+
 class Medication
   def initialize(name,use,schedule)
     @name = name

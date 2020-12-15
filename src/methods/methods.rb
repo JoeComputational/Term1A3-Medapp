@@ -12,7 +12,7 @@ def loading_screen(string)
     string.length.times do |i| 
         clear
         puts HEADER_LINE
-        puts "Please Wait...".upcase.center(HEADER_LENGTH)
+        puts "--------Welcome to MediKait--------".upcase.center(HEADER_LENGTH)
         puts HEADER_LINE
         puts
         puts string[0, i].center(HEADER_LENGTH)
