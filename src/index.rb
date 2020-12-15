@@ -46,3 +46,20 @@ def save_data(curr_data)
     end
     read_data
   end
+
+  def medication_menu(curr_data, prompt)
+    read_data = read_medication
+    while true
+      menu_choices = ["Enter new Medication info", "Display Medication List", "Back to Main Menu", "Exit Application"]
+      menu_choice = prompt.select("Please Select: ",menu_choices)
+      choice = menu_choices.find_index(menu_choice)+1
+      if choice == 1
+        get_new_medication(curr_data)
+      elsif choice == 2
+        display_medication(read_data,curr_data)
+      else
+        break
+      end
+    end
+    choice
+  end
