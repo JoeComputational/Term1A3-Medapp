@@ -40,12 +40,15 @@ class Medication
   end
 end
 
-def save_data(curr_data)
-  open('medication-store.txt', 'a') { |f|
-    curr_data.each do |item|
-      f.puts(item.get_name + "," + item.get_use + ","+item.get_schedule)
+def save_data(read_data, curr_data)
+  open('medication-store.txt', 'w') do |f|
+    read_data.each do |item|
+      f.puts(item.get_name + ',' + item.get_use + ',' + item.get_schedule)
     end
-  }
+    curr_data.each do |item|
+      f.puts(item.get_name + ',' + item.get_use + ',' + item.get_schedule)
+    end
+  end
 end
 
 def read_medication
