@@ -1,5 +1,5 @@
 require 'tty-prompt'
-require 'tty-prompt'
+require 'colorize'
 
 #This here is the lines that surround the header as it comes in.
 HEADER_LINE = "--------------------------------------------------------------".colorize(:black).on_light_green.underline

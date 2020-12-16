@@ -1,5 +1,7 @@
 require 'tty-prompt'
 require 'colorize'
+require 'bundler'
+require 'rspec'
 require_relative './methods/methods.rb'
 
 loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
@@ -227,17 +229,17 @@ def mass_conversion(prompt)
     if choice >= 1 && choice <= 6
       value = get_value('Please enter value to convert: ')
       if choice == 1
-        puts  value.to_s + ' Kg = ' + (value * 1000).to_s + ' G'
+        puts  value.to_s + ' Kg = ' + (value * 1000).to_s + ' G'.colorize(:blue)
       elsif  choice == 2
-        puts  value.to_s + ' G = ' + (value * 1000).to_s + ' mG'
+        puts  value.to_s + ' G = ' + (value * 1000).to_s + ' mG'.colorize(:blue)
       elsif  choice == 3
-        puts  value.to_s + ' mg = ' + (value * 1000).to_s + ' uG'
+        puts  value.to_s + ' mg = ' + (value * 1000).to_s + ' uG'.colorize(:blue)
       elsif  choice == 4
-        puts  value.to_s + ' uG = ' + (value / 1000).to_s + ' mG'
+        puts  value.to_s + ' uG = ' + (value / 1000).to_s + ' mG'.colorize(:blue)
       elsif  choice == 5
-        puts  value.to_s + ' mG = ' + (value / 1000).to_s + ' G'
+        puts  value.to_s + ' mG = ' + (value / 1000).to_s + ' G'.colorize(:blue)
       elsif  choice == 6
-        puts  value.to_s + ' G = ' + (value / 1000).to_s + ' KG'
+        puts  value.to_s + ' G = ' + (value / 1000).to_s + ' KG'.colorize(:blue)
       end
     else
       break
@@ -255,17 +257,17 @@ def volume_conversion(prompt)
     if choice >= 1 && choice <= 6
       value = get_value('Please enter value to convert: ')
       if choice == 1
-        puts  value.to_s + ' KL = ' + (value * 1000).to_s + ' L'
+        puts  value.to_s + ' KL = ' + (value * 1000).to_s + ' L'.colorize(:blue)
       elsif  choice == 2
-        puts  value.to_s + ' L = ' + (value * 1000).to_s + ' mL'
+        puts  value.to_s + ' L = ' + (value * 1000).to_s + ' mL'.colorize(:blue)
       elsif  choice == 3
-        puts  value.to_s + ' mg = ' + (value * 1000).to_s + ' uL'
+        puts  value.to_s + ' mg = ' + (value * 1000).to_s + ' uL'.colorize(:blue)
       elsif  choice == 4
-        puts  value.to_s + ' uL = ' + (value / 1000).to_s + ' mL'
+        puts  value.to_s + ' uL = ' + (value / 1000).to_s + ' mL'.colorize(:blue)
       elsif  choice == 5
-        puts  value.to_s + ' mL = ' + (value / 1000).to_s + ' L'
+        puts  value.to_s + ' mL = ' + (value / 1000).to_s + ' L'.colorize(:blue)
       elsif  choice == 6
-        puts  value.to_s + ' L = ' + (value / 1000).to_s + ' KL'
+        puts  value.to_s + ' L = ' + (value / 1000).to_s + ' KL'.colorize(:blue)
       end
     else
       break
