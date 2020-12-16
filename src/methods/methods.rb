@@ -1,7 +1,8 @@
 require 'tty-prompt'
+require 'tty-prompt'
 
 #This here is the lines that surround the header as it comes in.
-HEADER_LINE = "--------------------------------------------------------------"
+HEADER_LINE = "--------------------------------------------------------------".colorize(:black).on_light_green.underline
 HEADER_LENGTH = HEADER_LINE.length
 
 # clears the screen
