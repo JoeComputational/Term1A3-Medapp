@@ -281,8 +281,9 @@ def main_loop
   curr_data = Array.new
   read_data = Array.new
   while true
+    puts ""
     menu_choices = ['Medication Lists and Information', 'Medication Route Definitions', 'Volume Unit Conversion', 'Mass Unit Conversion', 'BMI Calculater', 'Exit']
-    menu_choice = prompt.select('Please Select: ', menu_choices)
+    menu_choice = prompt.select('Please Select From the Following Options: ', menu_choices)
     choice = menu_choices.find_index(menu_choice) + 1
     if choice == 1
       value = medication_menu(curr_data, prompt, read_data)
@@ -298,7 +299,7 @@ def main_loop
       break if value == 3
     elsif choice == 5
       value = bmi_calculator(prompt)
-      break if value == 2
+      break if value == 3
     else
       break
     end
