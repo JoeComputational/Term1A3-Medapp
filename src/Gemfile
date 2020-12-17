@@ -9,3 +9,6 @@ gem 'rspec'
 
 source 'https://rubygems.org'
 gem 'bundler'
+
+source 'https://rubygems.org'
+gem 'tty-font'

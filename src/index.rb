@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require 'tty-font'
 require 'colorize'
 require 'bundler'
 require 'rspec'
