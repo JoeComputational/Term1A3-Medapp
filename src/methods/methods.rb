@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require 'tty-font'
 require 'colorize'
 
 #This here is the lines that surround the header as it comes in.
@@ -10,10 +11,11 @@ def clear
     puts "\e[2J\e[f"
 end
 def loading_screen(string)
+    font = TTY::Font.new(:doom)
     string.length.times do |i| 
         clear
         puts HEADER_LINE
-        puts "--------Welcome to MediKait--------".upcase.center(HEADER_LENGTH)
+        puts font.write("              MediKait").colorize(:blue)
         puts HEADER_LINE
         puts
         puts string[0, i].center(HEADER_LENGTH)
