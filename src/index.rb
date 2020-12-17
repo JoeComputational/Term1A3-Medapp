@@ -82,18 +82,7 @@ def vitamin_use(prompt)
   menu_choices.find_index(menu_choice) + 1
 end
 
-def display_definitions(prompt)
-  definitions = ['IM– Intramuscular', 'IO– Intraosseous', 'IV– Intravenous', 'IVP– Intravenous Push',
-                 'ID – Intradermal', 'IN – Intranasal', 'IP – Intraperitoneal', 'IT – Intrathecal', 'IVPB – Intravenous piggyback',
-                 'p.o – By mouth', 'SC / SubQ – Subcutaneous', 'SL – Sublingual', 'top. – Topical', 'vag. – Vaginally']
-  puts 'List of Definitions'
-  definitions.each do |item|
-    puts item
-  end
-  menu_choices = ['Back to Main Menu', 'Exit Application']
-  menu_choice = prompt.select('Please Select: ', menu_choices)
-  menu_choices.find_index(menu_choice) + 1
-end
+
 
 def do_update(medicines,index)
   puts 'Please Enter New Medication Name: '
@@ -210,7 +199,18 @@ def get_value(message)
   value
 end
 
-
+def display_definitions(prompt)
+  definitions = ['IM– Intramuscular', 'IO– Intraosseous', 'IV– Intravenous', 'IVP– Intravenous Push',
+                 'ID – Intradermal', 'IN – Intranasal', 'IP – Intraperitoneal', 'IT – Intrathecal', 'IVPB – Intravenous piggyback',
+                 'p.o – By mouth', 'SC / SubQ – Subcutaneous', 'SL – Sublingual', 'top. – Topical', 'vag. – Vaginally']
+  puts 'List of Definitions'
+  definitions.each do |item|
+    puts item
+  end
+  menu_choices = ['Back to Main Menu', 'Exit Application']
+  menu_choice = prompt.select('Please Select: ', menu_choices)
+  menu_choices.find_index(menu_choice) + 1
+end
 
 def volume_conversion(prompt)
   volume_choices = ['KL to L', 'L to mL', 'mL to uL', 'uL to mL', 'mL to L',
