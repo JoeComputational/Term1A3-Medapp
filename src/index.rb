@@ -129,6 +129,8 @@ def medication_menu(curr_data, prompt, read_data)
     end
   end
   choice
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def get_info_value
@@ -193,6 +195,8 @@ def vitamin_use(prompt)
   menu_choices = ['Back to Main Menu', 'Exit Application']
   menu_choice = prompt.select('Please Select: ', menu_choices)
   menu_choices.find_index(menu_choice) + 1
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def display_definitions(prompt)
@@ -206,6 +210,8 @@ def display_definitions(prompt)
   menu_choices = ['Back to Main Menu', 'Exit Application']
   menu_choice = prompt.select('Please Select: ', menu_choices)
   menu_choices.find_index(menu_choice) + 1
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def volume_conversion(prompt)
@@ -234,6 +240,8 @@ def volume_conversion(prompt)
     end
   end
   choice
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def mass_conversion(prompt)
@@ -262,6 +270,8 @@ def mass_conversion(prompt)
     end
   end
   choice
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def bmi_calculator(prompt)
@@ -288,6 +298,8 @@ def bmi_calculator(prompt)
     end
   end
   choice
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def main_loop
