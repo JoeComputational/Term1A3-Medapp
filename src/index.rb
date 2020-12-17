@@ -186,7 +186,7 @@ def vitamin_use(prompt)
   vitamins = ['Vitamin D- Helps your body absorb calcium', 'Vitamin C- Immune system Boost/growth', 'Vitamin B Complex- Increase Energy, Brain Function and Cell Metabolism', 'IVP– Intravenous Push',
                  'Iron- Increase Energy, Brain Function and Promotes Healthy Red Blood Cells', 'Zinc- Immune Support/Energy Absorbtion', 'Calcium- Promotes Strong Bones and Teeth', 
                  'Magnesium- Bone Health/Energy Production (also good for cramps)', 'Folate/Folic Acid- Aids Fetus Development, Fights Depression and combats Inflammation']
-  puts 'List of Useful supplements'
+  puts 'List of Useful supplements'.colorize(:blue)
   vitamins.each do |item|
     puts item
   end
@@ -199,7 +199,7 @@ def display_definitions(prompt)
   definitions = ['IM– Intramuscular', 'IO– Intraosseous', 'IV– Intravenous', 'IVP– Intravenous Push',
                  'ID – Intradermal', 'IN – Intranasal', 'IP – Intraperitoneal', 'IT – Intrathecal', 'IVPB – Intravenous piggyback',
                  'p.o – By mouth', 'SC / SubQ – Subcutaneous', 'SL – Sublingual', 'top. – Topical', 'vag. – Vaginally']
-  puts 'List of Definitions'
+  puts 'List of Definitions'.colorize(:blue)
   definitions.each do |item|
     puts item
   end
@@ -304,16 +304,16 @@ def main_loop
       break if value == 5 || value == 3
     elsif choice == 2
       value = vitamin_use(prompt)
-      break if value == 8
+      break if value == 2
     elsif choice == 3
       value = display_definitions(prompt)
-      break if value == 8
+      break if value == 2
     elsif choice == 4
       value = volume_conversion(prompt)
       break if value == 8
     elsif choice == 5
       value = mass_conversion(prompt)
-      break if value == 3
+      break if value == 8
     elsif choice == 6
       value = bmi_calculator(prompt)
       break if value == 3
