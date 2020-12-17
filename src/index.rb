@@ -44,8 +44,6 @@ class Medication
   end
 end
 
-
-
 def save_data(read_data, curr_data)
   open('medication-store.txt', 'w') do |f|
     read_data.each do |item|
@@ -68,10 +66,6 @@ def read_medication(read_data)
   end
   read_data
 end
-
-
-
-
 
 def do_update(medicines,index)
   puts 'Please Enter New Medication Name: '
