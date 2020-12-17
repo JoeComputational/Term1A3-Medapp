@@ -121,7 +121,7 @@ def update_medication(read_data, curr_data ,prompt)
   loop do
     display_medication(read_data, curr_data)
     while true
-      value = get_value('Please Entre ID of Medicine to update: ').to_i
+      value = get_value('Please Enter ID of Medicine to update: ').to_i
       if value > (read_data.length + curr_data.length)
         puts 'Please enter id value within range'
       else
