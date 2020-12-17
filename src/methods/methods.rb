@@ -1,6 +1,7 @@
 require 'tty-prompt'
 require 'tty-font'
 require 'colorize'
+require 'rspec'
 
 #This here is the lines that surround the header as it comes in.
 HEADER_LINE = "-------------------------------------------------------------------------------".colorize(:black).on_light_green.underline
