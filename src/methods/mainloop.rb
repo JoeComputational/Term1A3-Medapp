@@ -21,7 +21,6 @@ def loading_screen(string)
           puts "Welcome to the App user!".center(HEADER_LENGTH).colorize(:blue)
         end
         
-        puts string[0, i].center(HEADER_LENGTH)
         end
     end
 
