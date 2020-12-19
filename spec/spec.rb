@@ -1,4 +1,18 @@
-require 'rspec'
+require 'rspec/autorun'
+
+describe Calculations do
+  let(:calculator) { Calculations.new }
+
+  it "finds the factor of 8" do  
+    expect(calculator.factorial_of(8)).to eq(4, 12)
+  end
+end
+
+describe Factorial do
+  it "does something" do
+    # this is the output
+  end
+end
 
 describe Output do
     describe "#submit" do
