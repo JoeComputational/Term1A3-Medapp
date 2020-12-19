@@ -16,7 +16,7 @@ def loading_screen(string)
         puts HEADER_LINE
         puts
         if ARGV.length > 0
-          puts "Welcome to MediKait #{ARGV}".center(HEADER_LENGTH).colorize(:blue)
+          puts "Welcome to MediKait #{ARGV[0]}".center(HEADER_LENGTH).colorize(:blue)
         else
           puts "Welcome to the App user!".center(HEADER_LENGTH).colorize(:blue)
         end
@@ -56,4 +56,5 @@ def loading_screen(string)
         end
       end
       save_data(read_data, curr_data)
+      clear
     end
