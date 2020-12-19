@@ -1,4 +1,0 @@
-Paracetamol,Mild to Moderate Pain Relief, S2
-Ibuprofen,NSAID - Mild to Moderate Pain Relief, S2
-Amoxicillin,Antibiotic, S4
-Cephlexin,Antibiotic, S4
