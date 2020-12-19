@@ -1,5 +1,5 @@
 def save_data(read_data, curr_data)
-  open('medication-store.txt', 'w') do |f|
+  open('../medication-store.txt', 'w') do |f|
     read_data.each do |item|
       f.puts(item.get_name + ',' + item.get_use + ',' + item.get_schedule)
     end
@@ -7,11 +7,13 @@ def save_data(read_data, curr_data)
       f.puts(item.get_name + ',' + item.get_use + ',' + item.get_schedule)
     end
   end
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def read_medication(read_data)
-  if File.exist?('medication-store.txt')
-    File.open('medication-store.txt').each do |line|
+  if File.exist?('../medication-store.txt')
+    File.open('../medication-store.txt').each do |line|
       data = line.split(',')
       read_data << Medication.new(data[0], data[1], data[2])
     end
@@ -58,6 +60,8 @@ def update_medication(read_data, curr_data ,prompt)
       break
     end
   end
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
 end
 
 def medication_menu(curr_data, prompt, read_data)
@@ -97,6 +101,8 @@ def get_info_value
       break
     end
   end
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
   value
 end
 
@@ -135,5 +141,7 @@ def get_value(message)
       break
     end
   end
+  puts "\e[H\e[2J"
+  loading_screen("T1A3 Ruby Code Terminal APP ".colorize(:blue))
   value
 end
